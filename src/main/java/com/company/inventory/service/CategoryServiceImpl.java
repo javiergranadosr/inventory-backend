@@ -44,4 +44,28 @@ public class CategoryServiceImpl implements ICategoryService{
         tempData.setDescription(data.getDescription());
         return this.categoryRepository.save(tempData);
     }
+
+    @Override
+    @Transactional
+    public Category updateCategory(Long id, CategoryDTO data) {
+        log.info("Call method updateCategory()");
+        Optional<Category> tempData = this.categoryRepository.findById(id);
+        if (tempData.isEmpty()) {
+            throw new ResourceNotFoundException("Category not found");
+        }
+        tempData.get().setName(data.getName());
+        tempData.get().setDescription(data.getDescription());
+        return this.categoryRepository.save(tempData.get());
+    }
+
+    @Override
+    @Transactional
+    public void deleteCategory(Long id) {
+        log.info("Call method deleteCategory()");
+        Optional<Category> tempData = this.categoryRepository.findById(id);
+        if (tempData.isEmpty()) {
+            throw new ResourceNotFoundException("Category not found");
+        }
+        this.categoryRepository.deleteById(id);
+    }
 }

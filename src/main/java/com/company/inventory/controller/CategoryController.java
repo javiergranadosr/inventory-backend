@@ -32,4 +32,15 @@ public class CategoryController {
     public ResponseEntity<Category> createCategory(@RequestBody CategoryDTO data) {
         return new ResponseEntity<>(this.categoryService.createCategory(data), HttpStatus.CREATED);
     }
+
+    @PutMapping(value = "/categories/update/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Category> updateCategory(@PathVariable Long id, @RequestBody CategoryDTO data) {
+        return new ResponseEntity<>(this.categoryService.updateCategory(id, data), HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/categories/delete/{id}")
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+        this.categoryService.deleteCategory(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
