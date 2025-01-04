@@ -2,6 +2,7 @@ package com.company.inventory.service;
 
 import com.company.inventory.exception.ResourceNotFoundException;
 import com.company.inventory.model.Category;
+import com.company.inventory.dto.CategoryDTO;
 import com.company.inventory.repository.ICategoryRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,5 +33,15 @@ public class CategoryServiceImpl implements ICategoryService{
             throw new ResourceNotFoundException("Category not found");
         }
         return data.get();
+    }
+
+    @Override
+    @Transactional
+    public Category createCategory(CategoryDTO data) {
+        log.info("Call method createCategory()");
+        Category tempData = new Category();
+        tempData.setName(data.getName());
+        tempData.setDescription(data.getDescription());
+        return this.categoryRepository.save(tempData);
     }
 }
