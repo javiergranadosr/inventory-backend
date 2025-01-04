@@ -1,10 +1,12 @@
 package com.company.inventory.service;
 
-import com.company.inventory.response.CategoryResponse;
+import com.company.inventory.model.Category;
+
+import java.util.List;
 
 public interface ICategoryService {
 
-
-    CategoryResponse getAllCategories();
+    List<Category> getAllCategories();
+    Category getCatgoryById(Long id);
 
 }
